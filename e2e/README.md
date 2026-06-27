@@ -88,6 +88,7 @@ e2e/
 ├── .auth/              ← gespeicherter Auth-State (gitignored)
 │   └── user.json       ← storageState (localStorage mit JWT)
 ├── pages/              ← Page Objects
+│   ├── home.page.ts
 │   ├── login.page.ts
 │   ├── register.page.ts
 │   ├── editor.page.ts

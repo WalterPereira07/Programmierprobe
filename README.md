@@ -1,42 +1,36 @@
-# ![Angular Example App](logo.png)
+# Playwright E2E Test Suite — Conduit (rola Programmierprobe)
 
-> Angular "Conduit" app (a Medium.com clone) with only a minimal E2E-testing setup.
+Playwright E2E tests for the [Conduit Angular app](https://github.com/bedoro/conduit) — a Medium.com clone built with Angular 21.
 
-This codebase is a fork of the [RealWorld](https://realworld.show) Angular
-example app: a fully fledged Angular application that talks to a real backend
-(CRUD, JWT auth, routing, pagination, favorites, following, ...).
-
-## Getting started
-
-Requires [Bun](https://bun.sh/docs/installation) (or npm - both work).
+## Quick start
 
 ```bash
-git clone <your-fork-url>
-cd angular-realworld-example-app
-bun install        # or: npm install
-bun run start      # dev server at http://localhost:4200
+cp .env.example .env          # create a test account and fill in credentials (see .env.example)
+npm install
+npx playwright install chromium
+npm run test:e2e
 ```
 
-The app talks to the public RealWorld API by default, so you need internet
-access. You can register a throwaway account from the app's Sign-up page.
+Requires Node.js ≥ 20 and internet access (tests run against `https://api.realworld.show`).
 
-### Tests
+## Documentation
 
-```bash
-bun run test       # unit tests (Vitest)
-bun run test:e2e   # end-to-end tests (Playwright) — starts the dev server automatically
-```
+- **[NOTES.md](NOTES.md)** — test plan, architecture decisions, bugs found, and KI-Einsatz
+- **[e2e/README.md](e2e/README.md)** — all available test commands and folder structure
+- **[CI-CD.md](CI-CD.md)** — CI/CD concept
+- **[CLAUDE.md](CLAUDE.md)** — KI-Transparenz (AI usage documentation)
 
-Your E2E tests go in `e2e/`; the Playwright config is `playwright.config.ts`.
+## What's covered
 
-## Functionality overview
+8 test cases across two Playwright projects (`e2e-guest` / `e2e-auth`):
 
-A social blogging site ("Conduit"). Pages: Home (`/`, article feeds + tags +
-pagination), Sign in / Sign up (`/login`, `/register`, JWT), Settings
-(`/settings`), Article editor (`/editor`), Article view (`/article/:slug`,
-comments), Profile (`/profile/:username`).
-
-## License
-
-- **Project code**: [MIT License](LICENSE)
-- Based on the [RealWorld](https://realworld.show) project.
+| TC  | Scenario                                            |
+| --- | --------------------------------------------------- |
+| TC1 | Login erfolgreich                                   |
+| TC2 | Login mit ungültigen Zugangsdaten                   |
+| TC3 | Registrierung eines neuen Nutzers                   |
+| TC4 | Submit-Button deaktiviert bei leeren Pflichtfeldern |
+| TC5 | Artikel erstellen und veröffentlichen               |
+| TC6 | Editor erreichbar als eingeloggter Nutzer           |
+| TC7 | Editor leitet nicht-eingeloggte Nutzer weiter       |
+| TC8 | Artikel löschen leitet zur Startseite weiter        |
