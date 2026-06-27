@@ -1,0 +1,15 @@
+{
+  /* Eigene TypeScript-Konfiguration für den e2e-Ordner.
+  Notwendig, weil die e2e-Tests Node.js-APIs nutzen (fs, path, process),
+  die im root-tsconfig nicht eingebunden sind (root ist für den Browser-Build).
+
+  - types: ["node"]        -> gibt TypeScript Kenntnis von Node.js-Globals (process.env, fs, path …)
+  - moduleResolution: node -> Playwright-Tests laufen in Node.js, nicht im Browser
+  - include                -> TypeScript nur auf den e2e-Ordner beschränken*/
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "moduleResolution": "node"
+  },
+  "include": ["./**/*.ts"]
+}
